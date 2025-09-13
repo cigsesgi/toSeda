@@ -48,21 +48,41 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      color: #ff69b4;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 40px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #ffe0ec;
+    }
   </style>
 </head>
 <body>
   <h1>🎉 İYİ Kİ DOĞDUN SEDA! 🎉</h1>
   <div class="sparkles">✨🎂💖🎈🎁✨</div>
 
-  <!-- 🎶 Telifsiz Happy Birthday müziği -->
-  <audio autoplay loop>
+  <!-- Butona tıklanınca müzik başlasın -->
+  <button onclick="startCelebration()">Kutlamayı Başlat 🎶</button>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- Müzik -->
+  <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e6e9be01e.mp3" type="audio/mpeg">
     Tarayıcınız bu ses öğesini desteklemiyor.
   </audio>
 
-  <!-- 🎊 Konfeti efekti -->
-  <canvas id="confetti"></canvas>
-
+  <!-- JavaScript -->
   <script>
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
@@ -110,7 +130,12 @@
       });
     }
 
-    setInterval(draw, 20);
+    function startCelebration() {
+      document.getElementById('bgMusic').play();
+      setInterval(draw, 20);
+      document.querySelector('button').style.display = 'none';
+    }
+
     window.addEventListener('resize', () => {
       W = window.innerWidth;
       H = window.innerHeight;
@@ -120,3 +145,4 @@
   </script>
 </body>
 </html>
+
