@@ -36,11 +36,6 @@
       100% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
     }
 
-    .sparkles {
-      font-size: 30px;
-      margin-top: 20px;
-    }
-
     canvas {
       position: fixed;
       top: 0;
@@ -65,25 +60,29 @@
     button:hover {
       background-color: #ffe0ec;
     }
+
+    #ytPlayer {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1>🎉 İYİ Kİ DOĞDUN SEDA! 🎉</h1>
-  <div class="sparkles">✨🎂💖🎈🎁✨</div>
+  <div style="font-size: 30px;">✨🎂💖🎈🎁✨</div>
 
-  <!-- Başlat butonu -->
   <button onclick="startCelebration()">Kutlamayı Başlat 🎶</button>
 
-  <!-- Konfeti -->
   <canvas id="confetti"></canvas>
 
-  <!-- Müzik -->
-  <audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e6e9be01e.mp3" type="audio/mpeg">
-    Tarayıcınız bu ses öğesini desteklemiyor.
-  </audio>
+  <!-- 🎶 YouTube Player -->
+  <iframe id="ytPlayer" width="0" height="0"
+    src="https://www.youtube.com/embed/ho08YLYDM88?autoplay=1&loop=1&playlist=ho08YLYDM88"
+    title="Happy Birthday Song"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
 
-  <!-- JavaScript -->
   <script>
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
@@ -132,21 +131,12 @@
     }
 
     function startCelebration() {
-      const bgMusic = document.getElementById('bgMusic');
-      bgMusic.load();
-      bgMusic.volume = 0.8;
-
-      bgMusic.play().then(() => {
-        // Ses başarıyla başladı
-        setInterval(draw, 20);
-        document.querySelector('button').style.display = 'none';
-      }).catch((error) => {
-        alert("Tarayıcı sesi engelliyor olabilir. Lütfen sayfayı yeniden açıp tekrar deneyin.");
-        console.error("Ses çalma hatası:", error);
-      });
+      document.getElementById("ytPlayer").style.display = "block";
+      setInterval(draw, 20);
+      document.querySelector("button").style.display = "none";
     }
 
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       W = window.innerWidth;
       H = window.innerHeight;
       canvas.width = W;
@@ -155,5 +145,3 @@
   </script>
 </body>
 </html>
-
-
