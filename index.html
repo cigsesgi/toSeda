@@ -77,10 +77,10 @@
   <canvas id="confetti"></canvas>
 
   <!-- YouTube Player -->
-  <iframe id="ytPlayer" width="0" height="0"
-    src="https://www.youtube.com/embed/wnmss7h5g9Y?autoplay=1&loop=1&playlist=wnmss7h5g9Y"
-    frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  <div id="ytPlayer"></div>
 
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
@@ -128,10 +128,21 @@
       });
     }
 
+    // YouTube API
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytPlayer', {
+        height: '0',
+        width: '0',
+        videoId: 'wnmss7h5g9Y',
+        playerVars: { 'loop': 1, 'playlist': 'wnmss7h5g9Y' }
+      });
+    }
+
     function startCelebration() {
-      document.getElementById("ytPlayer").style.display = "block"; // YouTube çalıyor
-      setInterval(draw, 20); // Konfeti
       document.querySelector("button").style.display = "none"; // Butonu gizle
+      setInterval(draw, 20); // Konfeti
+      player.playVideo(); // Müziği başlat
     }
 
     window.addEventListener("resize", () => {
