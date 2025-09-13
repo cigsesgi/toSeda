@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>İyi ki Doğdun Seda!</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      color: white;
+      animation: colorChange 10s infinite alternate;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 60px;
+      text-shadow: 2px 2px 4px #000;
+      animation: bounce 2s infinite;
+      z-index: 1;
+      position: relative;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes colorChange {
+      0% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+      25% { background: linear-gradient(45deg, #fbc2eb, #a6c1ee); }
+      50% { background: linear-gradient(45deg, #fccb90, #d57eeb); }
+      75% { background: linear-gradient(45deg, #ffecd2, #fcb69f); }
+      100% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+    }
+
+    .sparkles {
+      font-size: 30px;
+      margin-top: 20px;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 İYİ Kİ DOĞDUN SEDA! 🎉</h1>
+  <div class="sparkles">✨🎂💖🎈🎁✨</div>
+
+  <!-- 🎶 Telifsiz Happy Birthday müziği -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e6e9be01e.mp3" type="audio/mpeg">
+    Tarayıcınız bu ses öğesini desteklemiyor.
+  </audio>
+
+  <!-- 🎊 Konfeti efekti -->
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+
+    const confettiCount = 300;
+    const confetti = [];
+
+    for (let i = 0; i < confettiCount; i++) {
+      confetti.push({
+        x: Math.random() * W,
+        y: Math.random() * H - H,
+        r: Math.random() * 6 + 2,
+        d: Math.random() * confettiCount,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        tilt: Math.random() * 10 - 10
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      confetti.forEach((c, i) => {
+        ctx.beginPath();
+        ctx.lineWidth = c.r;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
+        ctx.stroke();
+      });
+      update();
+    }
+
+    function update() {
+      confetti.forEach((c, i) => {
+        c.y += Math.cos(c.d) + 1 + c.r / 2;
+        c.x += Math.sin(0.01);
+        if (c.y > H) {
+          confetti[i].y = -10;
+          confetti[i].x = Math.random() * W;
+        }
+      });
+    }
+
+    setInterval(draw, 20);
+    window.addEventListener('resize', () => {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    });
+  </script>
+</body>
+</html>
