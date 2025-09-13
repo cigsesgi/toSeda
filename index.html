@@ -70,18 +70,16 @@
   <h1>🎉 İYİ Kİ DOĞDUN SEDA! 🎉</h1>
   <div style="font-size: 30px;">✨🎂💖🎈🎁✨</div>
 
+  <!-- Başlat butonu -->
   <button onclick="startCelebration()">Kutlamayı Başlat 🎶</button>
 
+  <!-- Konfeti -->
   <canvas id="confetti"></canvas>
 
-  <!-- 🎶 YouTube Player -->
+  <!-- YouTube Player -->
   <iframe id="ytPlayer" width="0" height="0"
     src="https://www.youtube.com/embed/ho08YLYDM88?autoplay=1&loop=1&playlist=ho08YLYDM88"
-    title="Happy Birthday Song"
-    frameborder="0"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
+    frameborder="0" allow="autoplay" allowfullscreen></iframe>
 
   <script>
     const canvas = document.getElementById("confetti");
@@ -131,9 +129,9 @@
     }
 
     function startCelebration() {
-      document.getElementById("ytPlayer").style.display = "block";
-      setInterval(draw, 20);
-      document.querySelector("button").style.display = "none";
+      document.getElementById("ytPlayer").style.display = "block"; // YouTube çalıyor
+      setInterval(draw, 20); // Konfeti
+      document.querySelector("button").style.display = "none"; // Butonu gizle
     }
 
     window.addEventListener("resize", () => {
