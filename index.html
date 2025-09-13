@@ -135,12 +135,26 @@
         height: '0',
         width: '0',
         videoId: 'wnmss7h5g9Y',
-        playerVars: { 'loop': 1, 'playlist': 'wnmss7h5g9Y' }
+        playerVars: { 
+          'autoplay': 0, // Butona basınca çalacak
+          'loop': 1,
+          'playlist': 'wnmss7h5g9Y'
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
       });
     }
 
+    function onPlayerStateChange(event) {
+      // Video bitince tekrar başlat
+      if(event.data === YT.PlayerState.ENDED) {
+        player.playVideo();
+      }
+    }
+
     function startCelebration() {
-      document.querySelector("button").style.display = "none"; // Butonu gizle
+      document.querySelector("button").style.display = "none"; // Buton gizle
       setInterval(draw, 20); // Konfeti
       player.playVideo(); // Müziği başlat
     }
