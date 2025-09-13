@@ -71,9 +71,10 @@
   <h1>🎉 İYİ Kİ DOĞDUN SEDA! 🎉</h1>
   <div class="sparkles">✨🎂💖🎈🎁✨</div>
 
-  <!-- Butona tıklanınca müzik başlasın -->
+  <!-- Başlat butonu -->
   <button onclick="startCelebration()">Kutlamayı Başlat 🎶</button>
 
+  <!-- Konfeti -->
   <canvas id="confetti"></canvas>
 
   <!-- Müzik -->
@@ -131,9 +132,18 @@
     }
 
     function startCelebration() {
-      document.getElementById('bgMusic').play();
-      setInterval(draw, 20);
-      document.querySelector('button').style.display = 'none';
+      const bgMusic = document.getElementById('bgMusic');
+      bgMusic.load();
+      bgMusic.volume = 0.8;
+
+      bgMusic.play().then(() => {
+        // Ses başarıyla başladı
+        setInterval(draw, 20);
+        document.querySelector('button').style.display = 'none';
+      }).catch((error) => {
+        alert("Tarayıcı sesi engelliyor olabilir. Lütfen sayfayı yeniden açıp tekrar deneyin.");
+        console.error("Ses çalma hatası:", error);
+      });
     }
 
     window.addEventListener('resize', () => {
@@ -145,4 +155,5 @@
   </script>
 </body>
 </html>
+
 
